@@ -64,3 +64,23 @@ const PORT = 5000;
 app.listen(PORT, () => {
     console.log(`server running on port ${PORT}`)
 });
+
+//now we will create an endpoint to get a single todo from the database
+//note :id is the endpoint in the route, its a variable parameter we get with req.params.id
+app.get('/api/v1/todos/:id', (req,res) => {
+    const id = parseInt(req.params.id, 10);
+    //the db coming from hard coded value
+    db.map( (todo) => {
+        if (todo.id === id) {
+            return res.status(200).send({
+                success: 'true',
+                message: 'todo retrieved successfully',
+                todo,
+            });
+        } 
+    });
+    return res.status(404).send({
+        success: 'false',
+        message: 'todo does not exist',
+    });
+});
