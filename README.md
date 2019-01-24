@@ -15,3 +15,7 @@ so if you have a json data coming from the client to the server
 
 after the req middlewhere runs you can do req.body.name aka make the json info a js object! 
 
+Get and Post at http://localhost:5000/api/v1/todos see post occuring below
+
+![Post](/img/post.png?raw=true "post")
+

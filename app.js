@@ -1,9 +1,14 @@
 import express from 'express';
 import db from './db/db';
+import bodyParser from 'body-parser';
 
 //setup the express app, boot the server via babel-node for es5 by running $ node_modules/.bin/babel-node app.js 
 //$ node app.js
 const app = express();
+
+// parse incoming requests data
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //get all todos, note api endpoint provided as first parameter, 
 //second parameter is function that runs everytime we hit the endpoint
@@ -19,6 +24,33 @@ app.get('/api/v1/todos', (req,res) => {
         message: 'todos retrieved successfully',
         todos: db,
     })
+});
+
+//make a post endpoint to create a todo
+app.post('/api/v1/todos', (req, res) => {
+    if(!req.body.title) {
+        return res.status(400).send({
+            success: 'false',
+            message: 'title is required',
+        });
+    }
+    else if(!req.body.description) {
+        return res.status(400).send({
+            success: 'false',
+            message: 'description is required',
+        });
+    }
+    const todo = {
+        id: db.length+1,
+        title: req.body.title,
+        description: req.body.description,
+    }
+    db.push(todo);
+    return res.status(201).send({
+        success: 'true',
+        message: 'todo added successfully',
+        todo,
+    });
 });
 
 //you will access the server at localhost:5000/api/v1/todos
