@@ -4,6 +4,7 @@
 /* eslint-disable class-methods-use-this */
 import db from '../db/db';
 
+//I'm making a class here, this will allow me to make an instance of the controller and have cleaner code invoked
 class TodosController {
     getAllTodos(req, res) {
         return res.status(200).send({
