@@ -1,7 +1,7 @@
 import express from 'express';
 import db from './db/db';
 import bodyParser from 'body-parser';
-// import router from '/routes/index.js';
+import router from '/routes/index.js';
 
 //setup the express app, boot the server via babel-node for es5 by running $ node_modules/.bin/babel-node app.js 
 //$ node app.js
