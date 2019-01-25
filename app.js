@@ -8,8 +8,8 @@ import router from '/routes/index.js';
 const app = express();
 
 // parse incoming requests data
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(router);
 
 //get all todos, note api endpoint provided as first parameter, 
 //second parameter is function that runs everytime we hit the endpoint
