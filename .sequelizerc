@@ -1,0 +1,16 @@
+const path = require('path');
+
+module.exports = {
+    "config": path.resolve('./server/config', 'config.json'),
+    "models-path": path.resolve('./server/models'),
+    "migrations-path": path.resolve('./server/migrations')
+};
+
+//The sequelizerc file is going to bootstrap our application with path aboves
+//config.json file is going to contain the config for application
+//the models path will contain our application models
+//migrations will contain the different migrations for our application, migration files are used to create our apps table using models that we create, the models contain the design for application tables
+
+//$ node_modules/.bin/sequelize init
+
+//npm pg is a postgresql client for Node.js, its responsible for creating the applications database connection. pg-store is a node package for serializing and deserializing JSON data to hstore format
