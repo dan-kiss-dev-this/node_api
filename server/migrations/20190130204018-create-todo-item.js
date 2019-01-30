@@ -6,7 +6,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       description: {
         type: Sequelize.STRING
@@ -24,7 +24,7 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'Todos',
-          key: id,
+          key: 'id',
           as: 'todoId',
         },
       },

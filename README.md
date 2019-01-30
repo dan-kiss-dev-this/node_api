@@ -23,3 +23,5 @@ On your terminal export your database url like this:
 
 export DATABASE_URL=postgres://postgres@localhost:5432/database_name
 
+export DATABASE_URL=postgres://macbook@localhost:5432/todo-app
+
