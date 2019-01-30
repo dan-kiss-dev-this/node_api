@@ -3,6 +3,7 @@
 
 /* eslint-disable class-methods-use-this */
 import db from '../db/db';
+import models from '../server/models';
 
 //I'm making a class here, this will allow me to make an instance of the controller and have cleaner code invoked
 class TodosController {
@@ -31,30 +32,55 @@ class TodosController {
         });
     }
 
-    createTodo(req,res) {
+    //this is the new use with postgres createTodo
+    createTodo(req, res) {
+        console.log(38, req);
         if (!req.body.title) {
             return res.status(400).send({
-                success: false,
+                success: 'false',
                 message: 'title is required',
             });
-        } else if (!req.body.description) {
-            return res.status(400).send({
-                success: 'false',
-                message: 'description is required',
-            });
         }
+
         const todo = {
-            id: db.length + 1,
             title: req.body.title,
-            description: req.body.description,
         };
-        db.push(todo);
-        return res.status(201).send({
-            success: 'true',
-            message: 'todo added successfully',
-            todo,
+
+        models.Todo.create(todo).then((todo) => {
+            return res.status(201).send({
+                success: 'true',
+                message: 'todo added successfully',
+                todo,
+            });
         });
     }
+    //this method is updated to allow the data to persist by pushing a new todo to our db object
+    //we are going to make use of the create method provided by our models
+    //also we remove the description field since the todos label does not have a field for description as it's added in the todoItem table
+    // createTodo(req,res) {
+    //     if (!req.body.title) {
+    //         return res.status(400).send({
+    //             success: false,
+    //             message: 'title is required',
+    //         });
+    //     } else if (!req.body.description) {
+    //         return res.status(400).send({
+    //             success: 'false',
+    //             message: 'description is required',
+    //         });
+    //     }
+    //     const todo = {
+    //         id: db.length + 1,
+    //         title: req.body.title,
+    //         description: req.body.description,
+    //     };
+    //     db.push(todo);
+    //     return res.status(201).send({
+    //         success: 'true',
+    //         message: 'todo added successfully',
+    //         todo,
+    //     });
+    // }
 
     updateTodo(req, res) {
         const id = parseInt(req.params.id, 10);
