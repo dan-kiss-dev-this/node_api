@@ -18,7 +18,16 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      todoId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Todos',
+          key: id,
+          as: 'todoId',
+        },
+      },
     });
   },
   down: (queryInterface, Sequelize) => {
