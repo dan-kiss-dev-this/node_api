@@ -3,6 +3,7 @@
 
 /* eslint-disable class-methods-use-this */
 import db from '../db/db';
+// we import models with the statement below, this will go to models/index.js and import db this allows interacting with the database
 import models from '../server/models';
 
 //I'm making a class here, this will allow me to make an instance of the controller and have cleaner code invoked
@@ -34,7 +35,6 @@ class TodosController {
 
     //this is the new use with postgres createTodo
     createTodo(req, res) {
-        console.log(38, req);
         if (!req.body.title) {
             return res.status(400).send({
                 success: 'false',
@@ -46,6 +46,7 @@ class TodosController {
             title: req.body.title,
         };
 
+        //note the .then()runs when the todo has been successfully added to the database
         models.Todo.create(todo).then((todo) => {
             return res.status(201).send({
                 success: 'true',

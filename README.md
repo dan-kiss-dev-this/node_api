@@ -4,7 +4,9 @@ $ npm install
 
 $ npm run start
 
-this is a node server. See the comments in the code to understand the code also.
+$ node_modules/.bin/sequelize db:migrate
+
+this is a node server with postgres, the data is persistent. See the comments in the code to understand the code also.
 
 we are creating an endpoint to add todos but before we install a package, $npm install body-parser, the body parser parses aka converts incoming request bodies in a middleware before your handlers, availible under the req.bodyproperty
 so if you have a json data coming from the client to the server
@@ -19,11 +21,16 @@ Get and Post at http://localhost:5000/api/v1/todos see post occuring below
 
 ![Post](/img/post.png?raw=true "post")
 
-On your terminal export your database url like this:
+On your terminal export your database url from a .env file you make
 
-export DATABASE_URL=postgres://postgres@localhost:5432/database_name
+# note the change to database_name to postgres DATABASE_URL=postgres://postgres@localhost:5432/database_name
+DATABASE_URL=postgres://macbook@localhost:5432/todoapp
 
-for example: export DATABASE_URL=postgres://macbook@localhost:5432/todoapp
+"development": {
+    "use_env_variable": "DATABASE_URL"
+},
+
+then run the migrations with
 
 $ node_modules/.bin/sequelize db:migrate
 
