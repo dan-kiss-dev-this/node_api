@@ -115,28 +115,26 @@ class TodosController {
 
     deleteTodo(req, res) {
         const id = parseInt(req.params.id, 10);
-        let todoFound;
-        let itemIndex;
-        db.map((todo, index) => {
-            if (todo.id === id) {
-                todoFound = todo;
-                itemIndex = index;
+        models.Todo.destroy({
+            where: {
+                id,
             }
-        });
-
-        if (!todoFound) {
+        }).then(deleted => {
+            if (deleted === 1 ) {
+                return res.status(200).send({
+                    success: true,
+                    message: 'todo was deleted successfully',
+                    deleted,
+                });
+            }
             return res.status(404).send({
                 success: 'false',
-                message: 'todo not found',
+                message: 'todo does not exist',
             });
-        }
-        db.splice(itemIndex, 1);
-
-        return res.status(200).send({
-            success: 'true',
-            message: 'Todo deleted successfully',
         });
+
     }
+
 }
 
 //to create an instance of the class
