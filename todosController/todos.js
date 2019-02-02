@@ -16,29 +16,24 @@ class TodosController {
             todos,
         }));
     }
-    // getAllTodos(req, res) {
-    //     return res.status(200).send({
-    //         success: 'true',
-    //         message: 'todos retrieved successfully',
-    //         todos: db,
-    //     });
-    // }
 
     getTodo(req, res) {
-        const id = parseInd(req.params.id, 10);
-        db.map((todo) => {
-            if (todo.id === id) {
-                return res.status(200).send({
-                    success: 'true',
-                    message: 'todo retrieved successfully',
-                    todo,
+        const id = parseInt(req.params.id, 10);
+        models.Todo.findById(id).then(
+            todo => {
+                if (todo) {
+                    return res.status(200).send({
+                        success: 'true',
+                        message: 'todo retrieved successfully',
+                        todo,
+                    });
+                }
+                return res.status(404).send({
+                    success: 'false',
+                    message: 'todo does not exist',
                 });
             }
-        });
-        return res.status(404).send({
-            success: 'false',
-            message: 'todo does not exist',
-        });
+        );
     }
 
     //this is the new use with postgres createTodo
