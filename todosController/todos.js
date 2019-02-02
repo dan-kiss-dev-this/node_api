@@ -2,19 +2,27 @@
 //whenever we need to make use of any of the methods we will create an instance of the class and get the method we need
 
 /* eslint-disable class-methods-use-this */
-import db from '../db/db';
+// import db from '../db/db';
 // we import models with the statement below, this will go to models/index.js and import db this allows interacting with the database
 import models from '../server/models';
 
 //I'm making a class here, this will allow me to make an instance of the controller and have cleaner code invoked
 class TodosController {
     getAllTodos(req, res) {
-        return res.status(200).send({
+        models.Todo.findAll()
+        .then((todos) => res.status(200).send({
             success: 'true',
             message: 'todos retrieved successfully',
-            todos: db,
-        });
+            todos,
+        }));
     }
+    // getAllTodos(req, res) {
+    //     return res.status(200).send({
+    //         success: 'true',
+    //         message: 'todos retrieved successfully',
+    //         todos: db,
+    //     });
+    // }
 
     getTodo(req, res) {
         const id = parseInd(req.params.id, 10);
