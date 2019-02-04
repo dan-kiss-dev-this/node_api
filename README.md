@@ -22,7 +22,7 @@ $ node_modules/.bin/sequelize db:migrate
 
 $ npm run start
 
-Now you have a node server with ability to Create, Read, Update and Destroy data. The data is persistent. 
+Now you have a RESTful API written in node.js. The APIs in this project offer functionality to Create, Read, Update and Destroy data for a specific table. The data is persistent. 
 
 Get and Post at http://localhost:5000/api/v1/todos see post occuring below
 Put at http://localhost:5000/api/v1/todos/1
