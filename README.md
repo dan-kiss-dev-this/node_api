@@ -41,3 +41,5 @@ so if you have a json data coming from the client to the server
     "updatedAt": "2019-02-02T01:43:24.495Z"
 }
 after the req middlewhere runs you can do req.body.title aka make the json info a js object! 
+
+MIT License Author: Dan Kiss Feb 3 2019
